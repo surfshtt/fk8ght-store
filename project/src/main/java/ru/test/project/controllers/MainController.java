@@ -15,4 +15,9 @@ public class MainController {
     public String login() {
         return "log.html";
     }
+
+    @GetMapping("/catalog")
+    public String catalog() {
+        return "catalog.html";
+    }
 } 

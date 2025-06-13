@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>влад невский</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="marquee">
+        <div class="marquee-container">
+            <img src="/images/поехала.jpg" alt="Поехала">
+            <img src="/images/поехала.jpg" alt="Поехала">
+            <img src="/images/поехала.jpg" alt="Поехала">
+            <img src="/images/поехала.jpg" alt="Поехала">
+            <img src="/images/поехала.jpg" alt="Поехала">
+            <img src="/images/поехала.jpg" alt="Поехала">
+        </div>
+    </div>
+
+    <div class="main-container">
+        <aside class="catalog-sidebar">
+            <h2 class="catalog-title">Каталог</h2>
+            <ul class="catalog-menu">
+                <li class="catalog-item">
+                    <a href="/catalog/pants" class="catalog-link">Штаны</a>
+                </li>
+                <li class="catalog-item">
+                    <a href="/catalog/t-shirts" class="catalog-link">Футболки</a>
+                </li>
+                <li class="catalog-item">
+                    <a href="/catalog/sweaters" class="catalog-link">Кофты</a>
+                </li>
+                <li class="catalog-item">
+                    <a href="/catalog/accessories" class="catalog-link">Аксессуары</a>
+                </li>
+                <li class="catalog-item">
+                    <a href="/catalog/shoes" class="catalog-link">Обувь</a>
+                </li>
+                <li class="catalog-item">
+                    <a href="/catalog/hats" class="catalog-link">Головные уборы</a>
+                </li>
+            </ul>
+        </aside>
+        <main class="content">
+            <!-- Здесь будет основной контент -->
+        </main>
+    </div>
+</body>
+</html> 

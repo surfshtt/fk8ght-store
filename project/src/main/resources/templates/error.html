@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ошибка</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* Горизонтальное центрирование */
+            align-items: center; /* Вертикальное центрирование */
+            height: 100vh; /* Высота экрана */
+            margin: 0; /* Убираем отступы */
+            font-family: 'Inter', sans-serif; /* Шрифт */
+        }
+        .error-container {
+            text-align: center;
+            padding: 50px 20px;
+            max-width: 600px;
+        }
+        .error-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #7f7f7f;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="error-container">
+        <h1 class="error-title">что-то пошло не так</h1>
+        <a href="/" class="back-button">вернуться на главную</a>
+    </div>
+</body>
+</html>
