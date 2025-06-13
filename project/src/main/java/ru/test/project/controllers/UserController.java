@@ -3,7 +3,6 @@ package ru.test.project.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.test.project.model.User;
-import ru.test.project.repository.UserRepository;
 import ru.test.project.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
