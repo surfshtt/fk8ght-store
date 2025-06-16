@@ -13,7 +13,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String login() {
-        return "log.html";
+        return "login.html";
     }
 
     @GetMapping("/catalog")

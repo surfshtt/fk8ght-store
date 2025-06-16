@@ -6,6 +6,7 @@ import ru.test.project.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     boolean existsByTelegramId(String telegramId);
+    boolean existsByUsernameAndPassword(String username, String password);
     //User findByTelegramId(String telegramId);
     //User findByEmail(String telegramId);
     //User findById(long id);

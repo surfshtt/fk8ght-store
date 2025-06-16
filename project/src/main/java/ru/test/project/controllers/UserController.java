@@ -6,6 +6,7 @@ import ru.test.project.model.User;
 import ru.test.project.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
@@ -33,8 +34,18 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
+    @PostMapping("/tryLog")
+    public ResponseEntity<String> tryLog(@RequestBody User user) throws NoSuchAlgorithmException {
+        if(userService.tryLog(user)){
+            return ResponseEntity.ok("User successfully logged in");
+        }
+        else{
+            return ResponseEntity.badRequest().body("User data is incorrect");
+        }
+    }
+
     @PostMapping("save")
-    public ResponseEntity<String> addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody User user) throws NoSuchAlgorithmException {
         if(validateUserData(user)) {
             userService.addUser(user);
             return ResponseEntity.ok("User successfully added");

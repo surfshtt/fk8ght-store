@@ -21,7 +21,7 @@ public class User {
     @Column(nullable = false)
     public String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     public String telegramId;
 
     @Column(nullable = false)

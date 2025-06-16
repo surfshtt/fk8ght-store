@@ -24,8 +24,8 @@
 
     <div class="main-container" style="">
         <div class="register-container">
-            <h1 class="register-title">регистрация</h1>
-            <form class="register-form" th:action="@{/api/users/save}" method="post" id="registerForm">
+            <h1 class="register-title">вход</h1>
+            <form class="register-form" th:action="@{/api/users/trylog}" method="post" id="loginForm">
                 <div id="error-message" class="error-message" style="display: none;"></div>
                 <div class="form-group">
                     <label for="username">имя</label>
@@ -33,24 +33,14 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" id="email" name="email" required class="form-input">
-                </div>
-                
-                <div class="form-group">
                     <label for="password">пароль</label>
                     <input type="password" id="password" name="password" required class="form-input">
                 </div>
                 
-                <div class="form-group">
-                    <label for="confirmPassword">подтвердите пароль</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required class="form-input">
-                </div>
-                
-                <button type="submit" class="register-button">зарегистрироваться</button>
+                <button type="submit" class="register-button">войти</button>
                 
                 <div class="login-link">
-                    уже есть аккаунт? <a href="/login">войти</a>
+                    нет аккаунта? <a href="/register">зарегистрироваться</a>
                 </div>
             </form>
         </div>
@@ -139,25 +129,26 @@
             display: none;
         }
     </style>
+</body>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const userData = {
-                username: formData.get('username'),
-                email: formData.get('email'),
-                password: formData.get('password'),
-            };
+        const formData = new FormData(this);
+        const userData = {
+            username: formData.get('username'),
+            email: 'default',
+            password: formData.get('password'),
+            telegramId: 'default' // Добавляем обязательное поле
+        };
 
-            fetch('/api/users/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
+        fetch('/api/users/tryLog', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
             .then(response => {
                 if (!response.ok) {
                     return response.text().then(text => {
@@ -167,14 +158,14 @@
                 return response.text();
             })
             .then(data => {
-                window.location.href = '/login';
+                window.location.href = '/catalog';
             })
             .catch(error => {
                 const errorDiv = document.getElementById('error-message');
-                errorDiv.textContent = error.message || 'Произошла ошибка при регистрации';
+                errorDiv.textContent = error.message || 'Произошла ошибка при вохде';
                 errorDiv.style.display = 'block';
             });
-        });
-    </script>
-</body>
+    });
+</script>
+
 </html> 
