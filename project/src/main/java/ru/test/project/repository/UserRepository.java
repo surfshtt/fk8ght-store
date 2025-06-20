@@ -1,7 +1,7 @@
 package ru.test.project.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.test.project.model.User;
+import ru.test.project.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);

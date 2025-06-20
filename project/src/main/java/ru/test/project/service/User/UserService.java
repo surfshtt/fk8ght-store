@@ -1,6 +1,6 @@
 package ru.test.project.service.User;
 
-import ru.test.project.model.User;
+import ru.test.project.models.User;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;

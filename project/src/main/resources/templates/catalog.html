@@ -26,6 +26,9 @@
             <h2 class="catalog-title">Каталог</h2>
             <ul class="catalog-menu">
                 <li class="catalog-item">
+                    <a href="/catalog/all" class="catalog-link">Все</a>
+                </li>
+                <li class="catalog-item">
                     <a href="/catalog/pants" class="catalog-link">Штаны</a>
                 </li>
                 <li class="catalog-item">
@@ -47,7 +50,50 @@
         </aside>
         <main class="content">
             <!-- Здесь будет основной контент -->
+            <div id="items-container"></div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.catalog-link');
+            const itemsContainer = document.getElementById('items-container');
+
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+                    fetch(url)
+                        .then(response => {
+                            if (!response.ok) throw new Error('Network response was not ok');
+                            return response.json();
+                        })
+                        .then(items => {
+                            renderItems(items);
+                        })
+                        .catch(error => {
+                            itemsContainer.innerHTML = '<p>Ошибка загрузки товаров.</p>';
+                        });
+                });
+            });
+
+            function renderItems(items) {
+                if (!items || items.length === 0) {
+                    itemsContainer.innerHTML = '<p>Нет товаров в этой категории.</p>';
+                    return;
+                }
+                itemsContainer.innerHTML = items.map(item => `
+                    <div class="item-card">
+                        <h3>
+                            ${item.itemName}
+                        </h3>
+                        <p>${item.itemDescription}</p>
+                        <p>Тип: ${item.type}</p>
+                        <p>Цена: ${item.itemPrice}₽</p>
+                        <!-- <img src="data:image/jpeg;base64,${item.picture}" alt="item image" /> -->
+                    </div>
+                `).join('');
+            }
+        });
+    </script>
 </body>
 </html> 

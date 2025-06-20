@@ -1,6 +1,6 @@
 package ru.test.project.service.Catalog;
 
-import ru.test.project.model.Item;
+import ru.test.project.models.Item;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ru.test.project.model;
+package ru.test.project.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

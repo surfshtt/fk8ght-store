@@ -2,9 +2,10 @@ package ru.test.project.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.test.project.model.User;
+import ru.test.project.models.User;
 import ru.test.project.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -35,8 +36,9 @@ public class UserController {
     }
 
     @PostMapping("/tryLog")
-    public ResponseEntity<String> tryLog(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> tryLog(@RequestBody User user, HttpSession session) throws NoSuchAlgorithmException {
         if(userService.tryLog(user)){
+            session.setAttribute("username", user.username);
             return ResponseEntity.ok("User successfully logged in");
         }
         else{
@@ -45,9 +47,10 @@ public class UserController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<String> addUser(@RequestBody User user) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> addUser(@RequestBody User user, HttpSession session) throws NoSuchAlgorithmException {
         if(validateUserData(user)) {
             userService.addUser(user);
+            session.setAttribute("username", user.username);
             return ResponseEntity.ok("User successfully added");
         }
         else {
