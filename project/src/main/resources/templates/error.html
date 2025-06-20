@@ -9,11 +9,11 @@
     <style>
         body {
             display: flex;
-            justify-content: center; /* Горизонтальное центрирование */
-            align-items: center; /* Вертикальное центрирование */
-            height: 100vh; /* Высота экрана */
-            margin: 0; /* Убираем отступы */
-            font-family: 'Inter', sans-serif; /* Шрифт */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
         }
         .error-container {
             text-align: center;
@@ -41,10 +41,11 @@
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
-
-    <div class="error-container">
-        <h1 class="error-title">что-то пошло не так</h1>
-        <a href="/" class="back-button">вернуться на главную</a>
+    <div class="main-container">
+        <div class="error-container">
+            <h1 class="error-title">что-то пошло не так</h1>
+            <a href="/" class="back-button">вернуться на главную</a>
+        </div>
     </div>
 </body>
 </html>

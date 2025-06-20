@@ -28,7 +28,7 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.16);
         }
         .item-card img {
-            width: 260px;
+            width: 245px;
             height: 180px;
             object-fit: cover;
             border-radius: 12px;
@@ -56,7 +56,7 @@
         .item-card .details-btn {
             display: inline-block;
             padding: 8px 20px;
-            background: #757575;
+            background: #444;
             color: white;
             border: none;
             border-radius: 8px;
@@ -67,7 +67,7 @@
             transition: background 0.2s;
         }
         .item-card .details-btn:hover {
-            background: #444;
+            background: #757575;
         }
     </style>
 </head>
@@ -113,7 +113,6 @@
             </ul>
         </aside>
         <main class="content">
-            <!-- Здесь будет основной контент -->
             <div id="items-container" class="items-grid"></div>
         </main>
     </div>
@@ -167,7 +166,7 @@
                 itemsContainer.style.height = '';
                 itemsContainer.innerHTML = items.map(item => `
                     <div class="item-card">
-                        <img src="/images/квадрат.jpg" alt="item image" />
+                        <img src="/catalog/about/photo/${item.id}" alt="item image" onerror="this.onerror=null;this.src='/images/квадрат.jpg';" />
                         <h3>${item.itemName}</h3>
                         <p class="price">${item.itemPrice}₽</p>
                         <button class="details-btn" onclick="window.location.href='/catalog/about/${item.id}'">Подробнее</button>

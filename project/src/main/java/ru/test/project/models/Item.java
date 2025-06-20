@@ -33,6 +33,6 @@ public class Item {
     public LocalDate date;
 
     @Lob
-    @Column(nullable = true)
+    @Column(nullable = true, columnDefinition = "MEDIUMBLOB")
     public byte[] picture;
 }
