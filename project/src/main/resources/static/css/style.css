@@ -19,9 +19,9 @@ body {
 }
 
 .header {
-    background-color: var(--bg-color);
+    background-color: #dfdede;
     padding: 1.5rem 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 0.7px solid #333;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;

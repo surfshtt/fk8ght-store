@@ -2,6 +2,7 @@ package ru.test.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +18,19 @@ import java.util.List;
 public class CatalogController {
     private final CatalogService catalogService;
 
-
-
     @Autowired
     public CatalogController(CatalogService catalogService) { this.catalogService = catalogService;}
-
-    @GetMapping("/")
-    public List<Item> getAllItems() {
-        return catalogService.getAllItems();
-    }
 
     @GetMapping("/{item}")
     public List<Item> getItems(@PathVariable String item) {
         return catalogService.getItems(item);
+    }
+
+    @GetMapping("about/{id}")
+    public String aboutItem(@PathVariable long id, Model model) {
+        Item item = catalogService.getItem(id);
+        model.addAttribute("item", item);
+        return "about.html";
     }
 
     //@GetMapping("/**")

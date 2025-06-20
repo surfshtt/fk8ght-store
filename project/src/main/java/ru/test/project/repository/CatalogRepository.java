@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CatalogRepository extends JpaRepository<Item, Long> {
     List<Item> findAllByType(String type);
+    Item findById(long id);
 }
