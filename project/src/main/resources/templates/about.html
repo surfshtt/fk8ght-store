@@ -3,16 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>контакты - влад невский</title>
+    <title th:text="${item.itemName}">Подробности о вещи</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: center; /* Центрирует по горизонтали */
+            align-items: center; /* Центрирует по вертикали */
+            height: 100vh; /* Задает высоту на весь экран */
+            padding-top: 0; /* Убирает верхний отступ */
+        }
+
+        .item-details-container {
+            max-width: 600px;
+            margin: 0; /* Убирает отступы сверху и снизу */
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 22px; /* Внутренние отступы */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Центрирует содержимое внутри контейнера */
+        }
+        .item-details-img {
+            width: 320px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            background: #f3f3f3;
+        }
+        .item-details-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .item-details-price {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 18px;
+        }
+        .item-details-desc {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .add-to-cart-btn {
+            padding: 12px 32px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .add-to-cart-btn:hover {
+            background: #757575;
+        }
+    </style>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
-
     <div class="main-container">
-        <h1>Контакты</h1>
-        <!-- Здесь будет контактная информация -->
+        <div class="item-details-container">
+            <img class="item-details-img" th:src="@{'/catalog/about/photo/' + ${item.id}}" alt="item image" onerror="this.onerror=null;this.src='/images/квадрат.jpg';" />
+            <div class="item-details-title" th:text="${item.itemName}">Название вещи</div>
+            <div class="item-details-price" th:text="${item.itemPrice + '₽'}">Цена</div>
+            <div class="item-details-desc" th:text="${item.itemDescription}">Описание вещи</div>
+            <button class="add-to-cart-btn" onclick="addToCart([[${item.id}]])">В корзину</button>
+        </div>
     </div>
+    <script>
+        function addToCart(itemId) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (!cart.includes(itemId)) {
+                cart.push(itemId);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            updateCartHeader();
+            alert('Товар добавлен в корзину!');
+        }
+        function updateCartHeader() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            let cartLink = document.getElementById('cart-link');
+            if (cartLink) {
+                cartLink.innerText = 'корзина (' + cart.length + ')';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateCartHeader);
+    </script>
 </body>
 </html> 

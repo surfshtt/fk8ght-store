@@ -6,6 +6,78 @@
     <title>влад невский</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .items-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding: 15px 0;
+            align-items: center;
+        }
+        .item-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            transition: box-shadow 0.2s;
+            position: relative;
+            min-height: 180px;
+            cursor: pointer;
+            overflow: hidden;
+            max-width: 35%;
+            width: 100%;
+        }
+        .item-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+        }
+        .item-card img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 18px 0 0 18px;
+            background: #f3f3f3;
+            flex-shrink: 0;
+            aspect-ratio: 1/1;
+            display: block;
+        }
+        .item-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 24px 24px 24px 24px;
+            flex: 1;
+        }
+        .item-card-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            text-align: left;
+        }
+        .item-card-content p {
+            margin: 0;
+            color: #444;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+        @media (max-width: 700px) {
+            .item-card {
+                flex-direction: column;
+                min-height: unset;
+                max-width: 100%;
+            }
+            .item-card img {
+                width: 100%;
+                height: 180px;
+                border-radius: 18px 18px 0 0;
+            }
+            .item-card-content {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
@@ -23,8 +95,29 @@
 
 
         <main class="content">
-            <!-- Здесь будет основной контент -->
+            <div class="items-grid" id="news-cards">
+                <div class="item-card" onclick="window.location.href='/news/2'">
+                    <img src="/images/1.jpg" alt="Новость 1" />
+                    <div class="item-card-content">
+                        <h3>лето! глобальная ликвидация весенних и зимних коллекций</h3>
+                        <p>скорее смотри</p>
+                    </div>
+                </div>
+                <div class="item-card" onclick="window.location.href='/news/1'">
+                    <img src="/images/755229182057372.jpg" alt="Новость 1" />
+                    <div class="item-card-content">
+                        <h3>новые позиции Гоши Рубчинского</h3>
+                        <p>мы привезли для вас более десяти коробок с гошей, ждем</p>
+                    </div>
+                </div>
+                <div class="item-card" onclick="window.location.href='/news/2'">
+                    <img src="/images/поехала.jpg" alt="Новость 2" />
+                    <div class="item-card-content">
+                        <h3>дроп коллекции mf8ga уже в эту пятницу</h3>
+                        <p>лучшая летняя одежда этого сезона. высококачественный белорусский трикотаж</p>
+                    </div>
+                </div>
+            </div>
         </main>
-    </div>
 </body>
 </html> 

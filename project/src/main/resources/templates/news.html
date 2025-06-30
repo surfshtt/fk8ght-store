@@ -11,8 +11,51 @@
     <div th:replace="fragments/header :: header"></div>
 
     <div class="main-container">
-        <h1>Афиша</h1>
-        <!-- Здесь будет контент афиши -->
+        <div id="news-detail-container"></div>
     </div>
+    <script>
+        // Простые константы новостей
+        const newsData = [
+            {
+                id: 1,
+                title: 'Открытие нового магазина',
+                img: '/images/755229182057372.jpg',
+                short: 'Мы открыли новый магазин в центре города! Приходите за скидками и новинками.',
+                full: 'Мы рады сообщить об открытии нового магазина в самом центре города! Вас ждут эксклюзивные скидки, новые коллекции и приятные сюрпризы для первых покупателей. Не упустите шанс стать частью нашего праздника!'
+            },
+            {
+                id: 2,
+                title: 'Весенняя коллекция уже в продаже',
+                img: '/images/поехала.jpg',
+                short: 'Свежие поступления одежды и аксессуаров. Успейте купить первыми!',
+                full: 'Весна пришла, а вместе с ней и наша новая коллекция! Одежда, обувь и аксессуары на любой вкус уже ждут вас в нашем магазине. Следите за обновлениями и не пропустите лучшие новинки сезона.'
+            }
+        ];
+
+        function renderNewsDetail() {
+            const container = document.getElementById('news-detail-container');
+            const path = window.location.pathname;
+            const match = path.match(/\/news\/(\d+)/);
+            if (match) {
+                const id = parseInt(match[1]);
+                const news = newsData.find(n => n.id === id);
+                if (news) {
+                    container.innerHTML = `
+                        <div class="item-card" style="max-width: 500px; margin: 40px auto;">
+                            <img src="${news.img}" alt="${news.title}" />
+                            <h3>${news.title}</h3>
+                            <p style="margin-bottom: 18px;">${news.full}</p>
+                            <button class="details-btn">В корзину</button>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = '<p>Новость не найдена.</p>';
+                }
+            } else {
+                container.innerHTML = '<h1>Афиша</h1><p>Выберите новость на главной странице.</p>';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', renderNewsDetail);
+    </script>
 </body>
 </html> 

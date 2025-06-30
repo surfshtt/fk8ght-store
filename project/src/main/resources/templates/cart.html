@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - влад невский</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 24px;
+        }
+        .main-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .cart-item-card {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .cart-item-img {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 24px;
+            background: #f3f3f3;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .cart-item-price {
+            font-size: 1.1rem;
+            color: #444;
+        }
+        .remove-btn {
+            padding: 8px 18px;
+            background: #e57373;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 24px;
+            transition: background 0.2s;
+        }
+        .remove-btn:hover {
+            background: #b71c1c;
+        }
+        .cart-empty {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="main-container">
+        <div class="cart-container">
+            <div class="cart-title">Корзина</div>
+            <div class="cart-items-list" id="cart-items-list"></div>
+            <div class="cart-total" id="cart-total"></div>
+        </div>
+    </div>
+    <script>
+        async function fetchItem(id) {
+            const res = await fetch('/catalog/all');
+            const items = await res.json();
+            return items.find(i => i.id === id);
+        }
+        async function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const list = document.getElementById('cart-items-list');
+            const totalDiv = document.getElementById('cart-total');
+            if (cart.length === 0) {
+                list.innerHTML = '<div class="cart-empty">Ваша корзина пуста</div>';
+                totalDiv.innerHTML = '';
+                return;
+            }
+            let total = 0;
+            let html = '';
+            const res = await fetch('/catalog/all');
+            const items = await res.json();
+            cart.forEach(id => {
+                const item = items.find(i => i.id === id);
+                if (item) {
+                    total += item.itemPrice;
+                    html += `<div class='cart-item-card'>
+                        <img class='cart-item-img' src='/catalog/about/photo/${item.id}' onerror="this.onerror=null;this.src='/images/квадрат.jpg';" />
+                        <div class='cart-item-info'>
+                            <div class='cart-item-title'>${item.itemName}</div>
+                            <div class='cart-item-price'>${item.itemPrice}₽</div>
+                        </div>
+                        <button class='remove-btn' onclick='removeFromCart(${item.id})'>Удалить</button>
+                    </div>`;
+                }
+            });
+            list.innerHTML = html;
+            totalDiv.innerHTML = 'Итого: ' + total + '₽';
+        }
+        function removeFromCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart = cart.filter(i => i !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCartHeader();
+        }
+        function updateCartHeader() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            let cartLink = document.getElementById('cart-link');
+            if (cartLink) {
+                cartLink.innerText = 'корзина (' + cart.length + ')';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCart();
+            updateCartHeader();
+        });
+    </script>
+</body>
+</html> 

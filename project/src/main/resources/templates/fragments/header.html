@@ -14,8 +14,19 @@
             <a href="/contact" class="nav-link">контакты</a>
             <a th:href="${session.username != null} ? '/profile' : '/register'" class="register-btn"
                th:text="${session.username != null} ? 'профиль' : 'регистрация'"></a>
+            <a href="/cart" class="nav-link" id="cart-link">корзина (0)</a>
         </div>
     </nav>
 </header>
+<script>
+    function updateCartHeader() {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let cartLink = document.getElementById('cart-link');
+        if (cartLink) {
+            cartLink.innerText = 'корзина (' + cart.length + ')';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', updateCartHeader);
+</script>
 </body>
 </html>

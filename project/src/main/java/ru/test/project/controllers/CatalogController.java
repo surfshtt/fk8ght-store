@@ -32,12 +32,6 @@ public class CatalogController {
         return catalogService.getItems(item);
     }
 
-    @GetMapping("about/{id}")
-    public String aboutItem(@PathVariable long id, Model model) {
-        Item item = catalogService.getItem(id);
-        model.addAttribute("item", item);
-        return "about.html";
-    }
 
     @GetMapping("/about/photo/{id}")
     public ResponseEntity<byte[]> getItemPhoto(@PathVariable Long id) {
