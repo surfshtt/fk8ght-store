@@ -10,10 +10,9 @@
         <div class="nav-menu">
             <a href="/" class="nav-link">главная</a>
             <a href="/catalog" class="nav-link">барахолка</a>
-            <a href="/news" class="nav-link">афиша</a>
             <a href="/contact" class="nav-link">контакты</a>
-            <a th:href="${session.username != null} ? '/profile' : '/register'" class="register-btn"
-               th:text="${session.username != null} ? 'профиль' : 'регистрация'"></a>
+            <a th:href="${session.username != null} ? '/profile' : '/login'" class="register-btn"
+               th:text="${session.username != null} ? 'профиль' : 'войти'"></a>
             <a href="/cart" class="nav-link" id="cart-link">корзина (0)</a>
         </div>
     </nav>

@@ -9,4 +9,6 @@ public interface CatalogService {
     List<Item> getAllItems();
     List<Item> getItems(String type);
     Item getItem(long id);
+    void saveItem(Item item);
+    void deleteItem(long id);
 }

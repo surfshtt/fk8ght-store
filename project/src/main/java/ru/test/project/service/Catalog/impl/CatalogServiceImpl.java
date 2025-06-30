@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.test.project.models.Item;
 import ru.test.project.repository.CatalogRepository;
 import ru.test.project.service.Catalog.CatalogService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,5 +41,17 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public Item getItem(long id) {
         return catalogRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void saveItem(Item item) {
+        catalogRepository.save(item);
+    }
+
+    @Override
+    @Transactional
+    public void deleteItem(long id) {
+        catalogRepository.deleteById(id);
     }
 }

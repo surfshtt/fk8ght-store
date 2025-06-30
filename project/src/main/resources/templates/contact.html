@@ -10,9 +10,107 @@
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <div class="main-container">
-        <h1>Контакты</h1>
-        <!-- Здесь будет контактная информация -->
+    <div class="main-container" style="justify-content: center; align-items: center; min-height: 80vh; margin-top: 150px;">
+        <div class="contact-card">
+            <h1 class="contact-title">Контакты</h1>
+            <div class="contact-list">
+                <div class="contact-item">
+                    <span class="contact-icon phone-spin">📞</span>
+                    <span class="contact-label">Телефон:</span>
+                    <a href="tel:+375447718735" class="contact-link">+375 (44) 771-87-35</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span class="contact-label">Email:</span>
+                    <a href="mailto:fk8ghtt@gmail.com" class="contact-link">fk8ghtt@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">💬</span>
+                    <span class="contact-label">Telegram:</span>
+                    <a href="https://t.me/surfshtt" class="contact-link" target="_blank">@surfshtt</a>
+                </div>
+            </div>
+            <div class="contact-map">
+                <img src="/images/квадрат.jpg" alt="карта" class="contact-map-img">
+            </div>
+        </div>
     </div>
+    <style>
+        .contact-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px 28px 28px 28px;
+            max-width: 420px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .contact-list {
+            width: 100%;
+            margin-bottom: 28px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 1.1rem;
+        }
+        .contact-icon {
+            font-size: 1.7rem;
+            margin-right: 12px;
+            display: inline-block;
+        }
+        .contact-label {
+            min-width: 80px;
+            color: #555;
+            margin-right: 8px;
+        }
+        .contact-link {
+            color: #444;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .contact-link:hover {
+            color: #757575;
+            text-decoration: underline;
+        }
+        .contact-map {
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .contact-map-img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+        /* Анимация вращения для иконки телефона */
+        .phone-spin {
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            .contact-card {
+                padding: 18px 6px 18px 6px;
+            }
+            .contact-map-img {
+                max-width: 98vw;
+            }
+        }
+    </style>
 </body>
 </html> 

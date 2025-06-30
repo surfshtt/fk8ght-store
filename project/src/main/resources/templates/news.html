@@ -6,12 +6,188 @@
     <title>афиша - влад невский</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #fafbfc;
+        }
+        .main-container {
+            display: flex;
+            justify-content: center; /* Центрирует по горизонтали */
+            align-items: center; /* Центрирует по вертикали */
+            height: 100vh; /* Задает высоту на весь экран */
+            padding-top: 0; /* Убирает верхний отступ */
+        }
+
+        .item-details-container {
+            max-width: 600px;
+            margin: 0; /* Убирает отступы сверху и снизу */
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 22px; /* Внутренние отступы */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Центрирует содержимое внутри контейнера */
+        }
+        .news-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .news-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        .news-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 0 0 18px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .news-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 18px 18px 0 0;
+            background: #f3f3f3;
+        }
+        .news-card-content {
+            padding: 18px 20px 0 20px;
+            width: 100%;
+        }
+        .news-card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .news-card-short {
+            color: #444;
+            font-size: 1.05rem;
+            text-align: left;
+        }
+        .news-detail {
+            max-width: 600px;
+            margin: 0; /* Убирает отступы сверху и снизу */
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 22px; /* Внутренние отступы */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Центрирует содержимое внутри контейнера */
+        }
+
+
+        .news-detail img {
+            width: 100%;
+            max-width: 400px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 18px;
+        }
+        .news-detail-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .news-detail-full {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 18px;
+        }
+        .details-btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .details-btn:hover {
+            background: #757575;
+        }
+        /* Бегущая строка */
+        .marquee {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100vw;
+            background: #fff;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+            z-index: 100;
+            padding: 8px 0;
+        }
+        .marquee-container {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 100vw;
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            animation: marquee 18s linear infinite;
+        }
+        .marquee-img {
+            height: 32px;
+            margin: 0 18px;
+            border-radius: 6px;
+        }
+        .marquee-text {
+            font-size: 1.1rem;
+            color: #444;
+            font-weight: 500;
+            margin-right: 32px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
 </head>
 <body>
     <div th:replace="fragments/header :: header"></div>
-
     <div class="main-container">
         <div id="news-detail-container"></div>
+        <div id="news-list" style="display:none;"></div>
+    </div>
+    <div class="marquee">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <img src="/images/поехала.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">лето! глобальная ликвидация весенних и зимних коллекций</span>
+                <img src="/images/1.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">новые позиции Гоши Рубчинского</span>
+                <img src="/images/квадрат.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">дроп коллекции mf8ga уже в эту пятницу</span>
+                <img src="/images/поехала.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">лето! глобальная ликвидация весенних и зимних коллекций</span>
+                <img src="/images/1.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">новые позиции Гоши Рубчинского</span>
+                <img src="/images/квадрат.jpg" class="marquee-img" alt="img" />
+                <span class="marquee-text">дроп коллекции mf8ga уже в эту пятницу</span>
+            </div>
+        </div>
     </div>
     <script>
         // Простые константы новостей
@@ -34,6 +210,7 @@
 
         function renderNewsDetail() {
             const container = document.getElementById('news-detail-container');
+            const newsList = document.getElementById('news-list');
             const path = window.location.pathname;
             const match = path.match(/\/news\/(\d+)/);
             if (match) {
@@ -41,18 +218,34 @@
                 const news = newsData.find(n => n.id === id);
                 if (news) {
                     container.innerHTML = `
-                        <div class="item-card" style="max-width: 500px; margin: 40px auto;">
+                        <div class="news-detail">
                             <img src="${news.img}" alt="${news.title}" />
-                            <h3>${news.title}</h3>
-                            <p style="margin-bottom: 18px;">${news.full}</p>
-                            <button class="details-btn">В корзину</button>
+                            <div class="news-detail-title">${news.title}</div>
+                            <div class="news-detail-full">${news.full}</div>
+                            <button class="details-btn" onclick="window.location.href='/catalog'">В каталог</button>
                         </div>
                     `;
+                    newsList.style.display = 'none';
                 } else {
                     container.innerHTML = '<p>Новость не найдена.</p>';
                 }
             } else {
-                container.innerHTML = '<h1>Афиша</h1><p>Выберите новость на главной странице.</p>';
+                container.innerHTML = '<div class="news-title">Афиша</div>';
+                newsList.style.display = '';
+                let html = '<div class="news-cards">';
+                newsData.forEach(news => {
+                    html += `
+                        <div class="news-card" onclick="window.location.href='/news/${news.id}'">
+                            <img src="${news.img}" alt="${news.title}" />
+                            <div class="news-card-content">
+                                <div class="news-card-title">${news.title}</div>
+                                <div class="news-card-short">${news.short}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                newsList.innerHTML = html;
             }
         }
         document.addEventListener('DOMContentLoaded', renderNewsDetail);

@@ -1,5 +1,6 @@
 package ru.test.project.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,5 +51,25 @@ public class MainController {
     @GetMapping("/cart")
     public String cart() {
         return "cart.html";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact.html";
+    }
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile.html";
+    }
+
+    @GetMapping("/add-item")
+    public String addItemPage(HttpSession session) {
+        Object username = session.getAttribute("username");
+        if (username != null && username.equals("surfshtt")) {
+            return "add-item.html";
+        } else {
+            return "redirect:/";
+        }
     }
 } 

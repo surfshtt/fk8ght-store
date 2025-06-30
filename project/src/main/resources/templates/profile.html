@@ -3,178 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>регистрация - влад невский</title>
+    <title>Профиль - влад невский</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-    }
-</style>
-
-<body>
-    <div th:replace="fragments/header :: header"></div>
-
-    <div class="main-container" style="">
-        <div class="register-container">
-            <h1 class="register-title">регистрация</h1>
-            <form class="register-form" th:action="@{/api/users/save}" method="post" id="registerForm">
-                <div id="error-message" class="error-message" style="display: none;"></div>
-                <div class="form-group">
-                    <label for="username">имя</label>
-                    <input type="text" id="username" name="username" required class="form-input">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">email</label>
-                    <input type="email" id="email" name="email" required class="form-input">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">пароль</label>
-                    <input type="password" id="password" name="password" required class="form-input">
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmPassword">подтвердите пароль</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required class="form-input">
-                </div>
-                
-                <button type="submit" class="register-button">зарегистрироваться</button>
-                
-                <div class="login-link">
-                    уже есть аккаунт? <a href="/login">войти</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <style>
-        .register-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+        body {
+            background: #f7f7f7;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            min-height: 100vh;
         }
+        .profile-container {
+            max-width: 500px;
+            margin: 180px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
 
-        .register-title {
-            text-align: center;
-            color: #333;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             margin-bottom: 2rem;
-            font-size: 2rem;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e0e0e0 url('/static/images/noimage.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #757575;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h2 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.7rem;
             font-weight: 600;
+            color: #222;
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e1e1e1;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #757575;
-        }
-
-        .register-button {
-            width: 100%;
-            padding: 1rem;
-            background: #757575;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .register-button:hover {
-            background: #444;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 1.5rem;
+        .profile-info .profile-field {
             color: #666;
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
         }
-
-        .login-link a {
-            color: #b3d8a7;
-            text-decoration: none;
-            font-weight: 500;
+        .profile-section {
+            margin-top: 2.5rem;
         }
-
-        .login-link a:hover {
-            text-decoration: underline;
+        .profile-section h3 {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
-
-        .error-message {
-            background-color: #ffebee;
-            color: #c62828;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            text-align: center;
-            display: none;
+        .recent-purchases {
+            background: #f3f3f3;
+            border-radius: 10px;
+            padding: 1.2rem;
+            min-height: 60px;
+            color: #888;
+            font-size: 1rem;
         }
     </style>
-
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const userData = {
-                username: formData.get('username'),
-                email: formData.get('email'),
-                password: formData.get('password'),
-            };
-
-            fetch('/api/users/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(text);
-                    });
-                }
-                return response.text();
-            })
-            .then(data => {
-                window.location.href = '/login';
-            })
-            .catch(error => {
-                const errorDiv = document.getElementById('error-message');
-                errorDiv.textContent = error.message || 'Произошла ошибка при регистрации';
-                errorDiv.style.display = 'block';
-            });
-        });
-    </script>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <span>👤</span>
+            </div>
+            <div class="profile-info">
+                <h2>surfshtt</h2>
+                <div class="profile-field">Telegram: <span>@surfshtt</span></div>
+                <div class="profile-field">Почта: <span>fk8ghtt@gmail.com</span></div>
+            </div>
+        </div>
+        <div class="profile-section">
+            <h3>Последние покупки</h3>
+            <div class="recent-purchases">
+                У вас пока нет покупок.
+            </div>
+        </div>
+    </div>
 </body>
 </html> 

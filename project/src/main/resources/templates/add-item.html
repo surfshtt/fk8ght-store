@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить продукт - влад невский</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .add-item-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 22px; /* Внутренние отступы */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .add-item-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .add-item-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .add-item-form input, .add-item-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .add-item-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .add-item-btn {
+            width: 100%;
+            padding: 12px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .add-item-btn:hover {
+            background: #757575;
+        }
+        .add-item-success {
+            color: #388e3c;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .add-item-error {
+            color: #c62828;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="add-item-container" style="margin-top: 270px">
+        <div class="add-item-title">Добавить продукт</div>
+        <form class="add-item-form" id="addItemForm" enctype="multipart/form-data">
+            <div class="add-item-success" id="add-item-success" style="display:none;"></div>
+            <div class="add-item-error" id="add-item-error" style="display:none;"></div>
+            <label for="itemName">Название</label>
+            <input type="text" id="itemName" name="itemName" required>
+            <label for="itemPrice">Цена (₽)</label>
+            <input type="number" id="itemPrice" name="itemPrice" required min="0">
+            <label for="itemDescription">Описание</label>
+            <textarea id="itemDescription" name="itemDescription" required></textarea>
+            <label for="itemPhoto">Фото</label>
+            <input type="file" id="itemPhoto" name="itemPhoto" accept="image/*" required>
+            <button type="submit" class="add-item-btn">Добавить</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('addItemForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {
+                itemName: formData.get('itemName'),
+                itemPrice: formData.get('itemPrice'),
+                itemDescription: formData.get('itemDescription')
+            };
+            const file = formData.get('itemPhoto');
+            const body = new FormData();
+            body.append('item', new Blob([JSON.stringify(data)], {type: 'application/json'}));
+            body.append('photo', file);
+            try {
+                const res = await fetch('/catalog/add', {
+                    method: 'POST',
+                    body
+                });
+                if (!res.ok) throw new Error(await res.text());
+                document.getElementById('add-item-success').textContent = 'Товар успешно добавлен!';
+                document.getElementById('add-item-success').style.display = 'block';
+                document.getElementById('add-item-error').style.display = 'none';
+                form.reset();
+            } catch (err) {
+                document.getElementById('add-item-error').textContent = err.message || 'Ошибка при добавлении товара';
+                document.getElementById('add-item-error').style.display = 'block';
+                document.getElementById('add-item-success').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> 
