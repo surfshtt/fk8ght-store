@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Users")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -31,6 +31,6 @@ public class User {
     @Column(nullable = true)
     public byte[] profilePicture;
 
-    public User() {
+    public Users() {
     }
 }

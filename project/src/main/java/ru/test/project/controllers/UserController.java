@@ -2,7 +2,7 @@ package ru.test.project.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.test.project.models.User;
+import ru.test.project.models.Users;
 import ru.test.project.service.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.servlet.http.HttpSession;
@@ -21,22 +21,22 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/id/{id}")
-    public User getUserById(@PathVariable long id) {
+    public Users getUserById(@PathVariable long id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/username/{username}")
-    public User getUseBryUsername(@PathVariable String username) {
+    public Users getUseBryUsername(@PathVariable String username) {
         return userService.getUserByUsername(username);
     }
 
     @PostMapping("/tryLog")
-    public ResponseEntity<String> tryLog(@RequestBody User user, HttpSession session) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> tryLog(@RequestBody Users user, HttpSession session) throws NoSuchAlgorithmException {
         if(userService.tryLog(user)){
             session.setAttribute("username", user.username);
             return ResponseEntity.ok("User successfully logged in");
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<String> addUser(@RequestBody User user, HttpSession session) throws NoSuchAlgorithmException {
+    public ResponseEntity<String> addUser(@RequestBody Users user, HttpSession session) throws NoSuchAlgorithmException {
         if(validateUserData(user)) {
             userService.addUser(user);
             session.setAttribute("username", user.username);
@@ -59,7 +59,7 @@ public class UserController {
     }
 
 
-    private boolean validateUserData(User user){
+    private boolean validateUserData(Users user){
 
         if(user == null)
             return false;

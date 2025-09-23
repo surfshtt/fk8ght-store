@@ -3,7 +3,7 @@ package ru.test.project.service.Catalog.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import ru.test.project.models.Item;
+import ru.test.project.models.Items;
 import ru.test.project.repository.CatalogRepository;
 import ru.test.project.service.Catalog.CatalogService;
 
@@ -18,17 +18,17 @@ public class CatalogServiceImpl implements CatalogService {
     public CatalogServiceImpl(CatalogRepository catalogRepository) {this.catalogRepository = catalogRepository;}
 
     @Override
-    public void addItem(Item item) {
+    public void addItem(Items item) {
         catalogRepository.save(item);
     }
 
     @Override
-    public List<Item> getAllItems() {
+    public List<Items> getAllItems() {
         return catalogRepository.findAll();
     }
 
     @Override
-    public List<Item> getItems(String type) {
+    public List<Items> getItems(String type) {
         if(type.equals("all")){
             return getAllItems();
         }
@@ -38,7 +38,7 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public Item getItem(long id) {
+    public Items getItem(long id) {
         return catalogRepository.findById(id);
     }
 }

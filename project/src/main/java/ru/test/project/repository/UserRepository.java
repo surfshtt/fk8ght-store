@@ -1,10 +1,10 @@
 package ru.test.project.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.test.project.models.User;
+import ru.test.project.models.Users;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<Users, Long> {
+    Users findByUsername(String username);
     boolean existsByTelegramId(String telegramId);
     boolean existsByUsernameAndPassword(String username, String password);
     //User findByTelegramId(String telegramId);

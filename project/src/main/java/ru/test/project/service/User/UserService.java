@@ -1,15 +1,15 @@
 package ru.test.project.service.User;
 
-import ru.test.project.models.User;
+import ru.test.project.models.Users;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface UserService {
-    User getUserById(long id);
-    void addUser(User user) throws NoSuchAlgorithmException;
-    List<User> getAllUsers();
-    User getUserByUsername(String username);
+    Users getUserById(long id);
+    void addUser(Users user) throws NoSuchAlgorithmException;
+    List<Users> getAllUsers();
+    Users getUserByUsername(String username);
     boolean checkTelegram(String telegram);
-    boolean tryLog(User user) throws NoSuchAlgorithmException;
+    boolean tryLog(Users user) throws NoSuchAlgorithmException;
 }

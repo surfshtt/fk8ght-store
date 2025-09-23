@@ -3,7 +3,7 @@ package ru.test.project.service.User.impl;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.test.project.models.User;
+import ru.test.project.models.Users;
 import ru.test.project.repository.UserRepository;
 import ru.test.project.service.User.UserService;
 
@@ -23,24 +23,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
+    public Users getUserById(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
     @Override
-    public void addUser(User user) throws NoSuchAlgorithmException {
+    public void addUser(Users user) throws NoSuchAlgorithmException {
         user.password = hash(user.password);
         userRepository.save(user);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User getUserByUsername(String username) {return userRepository.findByUsername(username);}
+    public Users getUserByUsername(String username) {return userRepository.findByUsername(username);}
 
     @Override
     public boolean checkTelegram(String telegram) {
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean tryLog(User user) throws NoSuchAlgorithmException {
+    public boolean tryLog(Users user) throws NoSuchAlgorithmException {
         return userRepository.existsByUsernameAndPassword(user.username, hash(user.password));
     }
 
