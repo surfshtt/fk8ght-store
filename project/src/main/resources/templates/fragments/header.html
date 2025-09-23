@@ -10,10 +10,15 @@
         <div class="nav-menu">
             <a href="/" class="nav-link">главная</a>
             <a href="/catalog" class="nav-link">барахолка</a>
-            <a href="/news" class="nav-link">афиша</a>
-            <a href="/contact" class="nav-link">контакты</a>
+            <a href="/saved" class="nav-link"
+               th:text="${session.username != null} ? 'избранное' : ''">
+            </a>
+            <a href="/chats" class="nav-link"
+               th:text="${session.username != null} ? 'чаты' : ''">
+            </a>
             <a th:href="${session.username != null} ? '/profile' : '/register'" class="register-btn"
-               th:text="${session.username != null} ? 'профиль' : 'регистрация'"></a>
+               th:text="${session.username != null} ? 'профиль' : 'регистрация'">
+            </a>
         </div>
     </nav>
 </header>

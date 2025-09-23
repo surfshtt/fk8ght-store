@@ -20,4 +20,15 @@ public class MainController {
     public String catalog() {
         return "catalog.html";
     }
-} 
+
+    @GetMapping("/chats")
+    public String chats() {
+        return "chats.html";
+    }
+
+    @GetMapping("/saved")
+    public String saved() { return "saved.html";}
+
+    @GetMapping("/profile")
+    public String profile() {return "profile.html";}
+}

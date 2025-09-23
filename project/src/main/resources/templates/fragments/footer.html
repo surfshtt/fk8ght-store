@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<footer th:fragment="footer" class="footer" style="
+    background-color: #333333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+">
+  <p style="color: white;
+    margin-left: 10px;
+    margin-top: 10px;"
+  >
+    Контакты:
+
+  </p>
+<!--  <nav class="nav-container" style="color: white">-->
+<!--    <a href="/" class="logo">влад невский</a>-->
+<!--    <div class="nav-menu">-->
+<!--      <a href="/" class="nav-link">главная</a>-->
+<!--      <a href="/catalog" class="nav-link">барахолка</a>-->
+<!--      <a href="/saved" class="nav-link"-->
+<!--         th:text="${session.username != null} ? 'избранное' : ''">-->
+<!--      </a>-->
+<!--      <a href="/chats" class="nav-link"-->
+<!--         th:text="${session.username != null} ? 'чаты' : ''">-->
+<!--      </a>-->
+<!--      <a th:href="${session.username != null} ? '/profile' : '/register'" class="register-btn"-->
+<!--         th:text="${session.username != null} ? 'профиль' : 'регистрация'">-->
+<!--      </a>-->
+<!--    </div>-->
+<!--  </nav>-->
+</footer>
+</body>
+</html>
