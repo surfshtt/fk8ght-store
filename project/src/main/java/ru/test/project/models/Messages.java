@@ -20,7 +20,7 @@ public class Messages {
     @Column(nullable = false)
     public String userId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     public String message;
 
     @Lob
