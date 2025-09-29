@@ -7,12 +7,55 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
+
 <body>
     <div th:replace="fragments/header :: header"></div>
 
-    <div class="main-container">
-        <h1>чаты</h1>
-        <!-- Здесь будет контент афиши -->
+    <div class="marquee">
+        <div class="marquee-container">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+            <img src="/images/пост.gif" alt="Поехала">
+        </div>
     </div>
+
+    <div class="main-container">
+        <aside class="chat-sidebar">
+            <h2 class="chat-title">чаты</h2>
+            <ul class="chat-menu">
+<!--                <li class="catalog-item">-->
+<!--                    <a href="/catalog/all" class="catalog-link">Все</a>-->
+<!--                </li>-->
+            </ul>
+        </aside>
+        <main class="content">
+            <div class="chat-box" id="chat-box">
+
+            </div>
+
+            <div class="input-area" id="input-area">
+                <input type="text" id="message-input" placeholder="Введите сообщение..." />
+<!--                <input type="file" id="picture-input" placeholder="Фото..." name="Picture" accept="image/*"/>-->
+                <button id="send-button">Отправить</button>
+            </div>
+        </main>
+    </div>
+
 </body>
 </html> 
